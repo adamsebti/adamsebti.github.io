@@ -212,7 +212,7 @@ $("#input-box").resizable({
         'e': '#right-resize',
         's': '#bottom-resize'
     },
-	canel: "#input-box",
+	cancel: "#input-box",
 	
 });
 
