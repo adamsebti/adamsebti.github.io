@@ -70,7 +70,8 @@ body, html {
   float: left;
   border-right: 1px solid black;
   border-left: 1px solid black;
-  z-index: 999; }
+  z-index: 999;
+  padding-right: 2px; }
 
 .panel-button.top-panel {
   border-bottom: 2px solid black; }
