@@ -449,5 +449,8 @@ div:focus {
     /* Other non-webkit browsers */
     zoom: 80%;
     /* Webkit browsers */ } }
+    @media (max-width: 1255px) {
+  .panel-button {
+    padding-right: 0px; } }
 
 /*# sourceMappingURL=output.css.map */
