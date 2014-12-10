@@ -6,6 +6,8 @@ var pageHTML = $(".page-content").html();
 var pageArray = ["PAGE"];
 var pageCounter = {};
 
+
+
 //Returns an ID for a given page
 function getID(pageName) {
     if (pageArray.indexOf(pageName) == -1){
@@ -21,15 +23,17 @@ function getID(pageName) {
 function makeDroppable(element){
 	element.droppable( {
 	over: function(){
-		var width = $(".article-text").width() / 2;
-		$(".article-text").css("width" , width);
-		$(".input-box-container").fadeIn();
+		var pageID = "." + $(".selected").attr('class').split(' ')[0];
+		var width = $(".article-text" + pageID).width() / 2;
+		$(".article-text" + pageID).css("width" , width);
+		$(".input-box-container" + pageID).fadeIn();
 	},
 	out: function(){
-		$(".input-box-container").fadeOut();
+		var pageID = "." + $(".selected").attr('class').split(' ')[0];
+		$(".input-box-container" + pageID).fadeOut();
 		setTimeout(function() {
-		var width = $(".article-text").width() * 2;
-		$(".article-text").css("width" , width);
+			var width = $(".article-text" + pageID).width() * 2;
+			$(".article-text" + pageID).css("width" , width);
 		}, 500);
 
 	}
@@ -86,6 +90,8 @@ fileUpload(".Page");
  	$(pageSelector).find(".display-image").attr("class","display-image " + id);
  	$(pageSelector).find(".add-image-container").attr("class","add-image-container " + id);
  	$(pageSelector).find(".image-draggable-zone").attr("class","image-draggable-zone " + id);
+ 	$(pageSelector).find(".article-text").attr("class","article-text " + id);
+ 	$(pageSelector).find(".input-box-container").attr("class","input-box-container " + id)
  	
 
  	//Make article section droppable & and event listener for file upload
@@ -226,9 +232,10 @@ $('body').on('mouseleave', '.corner-hover', function(){
 	});
 //remove text box when clicking on X
 $('body').on('click', '.corner-hover', function(){
-	var width = $("#article-text").width() * 2;
-	$(".input-box-container").hide();
-	$(".article-text").css("width" , width);
+	var pageID = "." + $(".selected").attr('class').split(' ')[0];
+	var width = $(".article-text" + pageID).width() * 2;
+	$(".input-box-container" + pageID).hide();
+	$(".article-text" + pageID).css("width" , width);
 
 	});
 //Input box resizable function
