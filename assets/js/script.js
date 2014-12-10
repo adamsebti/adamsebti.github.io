@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
-var templateCounter = 0;
+var templateCounter = 0; //counter for numbers of pages (used to readjust size of leftbar)
 var text = true;
 var pageHTML = $(".page-content").html();
 var pageArray = ["PAGE"];
@@ -17,24 +17,49 @@ function getID(pageName) {
     	return getID(pageName+pageCounter[pageName]);
     }
 }
+//Makes an element droppable
+function makeDroppable(element){
+	element.droppable( {
+	over: function(){
+		var width = $(".article-text").width() / 2;
+		$(".article-text").css("width" , width);
+		$(".input-box-container").fadeIn();
+	},
+	out: function(){
+		$(".input-box-container").fadeOut();
+		setTimeout(function() {
+		var width = $(".article-text").width() * 2;
+		$(".article-text").css("width" , width);
+		}, 500);
+
+	}
+})}
+
+//Make article section droppable
+makeDroppable($(".article-container"));
+
+//Enable file upload event listener
+fileUpload(".Page");
+
 //ADD PAGE FUNCTION
- $("#add-page-logo").click(function(){
+ $(".add-page-logo").click(function(){
  	if (text) {
  		alert("Please enter a name for your page.")
  	} else {
  	if (templateCounter > 1) {
- 		var templatesHeight = $("#templates").height();
- 		var leftbarHeight = $("#left-bar").height();
+ 		var templatesHeight = $(".templates").height();
+ 		var leftbarHeight = $(".left-bar").height();
  		templatesHeight += $(".page-button").height() + 10;
  		leftbarHeight += $(".page-button").height() + 10;
- 		$("#templates").css("height", templatesHeight);
- 		$("#left-bar").css("height", leftbarHeight);
+ 		$(".templates").css("height", templatesHeight);
+ 		$(".left-bar").css("height", leftbarHeight);
  	};
  	var pageName = $(".add-page-input").val();
  	var id = getID(pageName);
  	var pageContent = "<div class='"+ id + " page-content current-page'>"+ pageHTML +"</div>";
+ 	$()
  	var previousPage = $(".last-page");
- 	var page = '<div class="'+ id +' page-button darkgray last-page"><div class="page-button-text">' + pageName + '</div><div class="remove-button"><img id="remove-logo"src="assets/images/remove.png"></div></div>';
+ 	var page = '<div class="'+ id +' page-button darkgray last-page"><div class="page-button-text">' + pageName + '</div><div class="remove-button"><img class="remove-logo"src="assets/images/remove.png"></div></div>';
 	$(".last-page").after(page);
  	previousPage.removeClass("last-page"); //update "last-page" pointer
  	var pageTab = '<div class="'+ id +' added page-tab last-tab"><div class="page-tab-text">'+ pageName + '</div></div>';
@@ -51,14 +76,28 @@ function getID(pageName) {
  	//Initialize new page
  	$(".current-page").hide();
  	$(".current-page").removeClass("current-page");
- 	$("#main").append(pageContent);
+ 	$(".main").append(pageContent);
  	$(".selected").removeClass("selected");
  	$(".last-tab").addClass("selected");
+
+ 	//Add page ID for file upload
+ 	var pageSelector = "." + id +".page-content";
+ 	$(pageSelector).find("input").attr("class","file-input " + id);
+ 	$(pageSelector).find(".display-image").attr("class","display-image " + id);
+ 	$(pageSelector).find(".add-image-container").attr("class","add-image-container " + id);
+ 	$(pageSelector).find(".image-draggable-zone").attr("class","image-draggable-zone " + id);
+ 	
+
+ 	//Make article section droppable & and event listener for file upload
+ 	setTimeout(function() {
+	 	makeDroppable($(".article-container"));
+	 	fileUpload("."+id);
+ 	}, 0);
 
  	
 
  }});
-
+//Pressing enter clicks on add-page + button
  $(".add-page-input").keydown(function(e) {
  	setTimeout(function() {
    		var input = $(".add-page-input").val();
@@ -75,11 +114,12 @@ function getID(pageName) {
  			alert("Please enter a name for your page.")
  		}
  		else {
- 		$("#add-page-logo").click(); }
+ 		$(".add-page-logo").click(); }
  	};
 
  });
 
+//Page tab selector function
 $('body').on('click', '.page-tab', function(){
 	if(!($(this).hasClass("selected"))){
 		$(".current-page").fadeOut(300);
@@ -94,27 +134,29 @@ $('body').on('click', '.page-tab', function(){
 	}	
 });
 
+//Make page red when hover over X
 $('body').on("mouseenter", ".remove-button", function(e) {
 
     $(this).parent().addClass("remove");
     $(this).css("opacity", "1");
 });
-
+//Undo red hover effect
 $('body').on("mouseleave", ".remove-button", function(e) {
 
     $(this).parent().removeClass("remove");
     $(this).css("opacity", "0");
 });
 
+//Page deletion function
 $('body').on('click', '.remove-button', function(){
 	//Adjust height of bar
 	if (templateCounter > 2) {
- 		var templatesHeight = $("#templates").height();
- 		var leftbarHeight = $("#left-bar").height();
+ 		var templatesHeight = $(".templates").height();
+ 		var leftbarHeight = $(".left-bar").height();
  		templatesHeight -= $(".page-button").height() + 10;
  		leftbarHeight -= $(".page-button").height() + 10;
- 		$("#templates").css("height", templatesHeight);
- 		$("#left-bar").css("height", leftbarHeight);
+ 		$(".templates").css("height", templatesHeight);
+ 		$(".left-bar").css("height", leftbarHeight);
  	};
  	templateCounter--;
  	if ($(this).parent().hasClass("last-page")) {
@@ -122,7 +164,7 @@ $('body').on('click', '.remove-button', function(){
  	};
  	var tabIndex = $(this).parent().index();
  	$(this).parent().remove();
- 	var tabList = $("#page-tabs").children();
+ 	var tabList = $(".page-tabs").children();
  	var numTabs = tabList.length;
  	var tabToRemove = tabList[tabIndex];
  	tabList[tabIndex].remove();
@@ -131,26 +173,25 @@ $('body').on('click', '.remove-button', function(){
  		var previousClasses = tabList[tabIndex - 1].className;
  		tabList[tabIndex - 1].setAttribute("class", previousClasses+ " last-tab");
  	};
- 	//Update page list
  	setTimeout(function() {
 		$(".last-tab").click();
 	},0)
  	
 
 });
-
-$("#input-text").click(function(){
+//Hide default input-box text
+$(".input-text").click(function(){
 	var text = jQuery.trim($(this).text());
 	if (text == "Start typing here.") {
 		$("#input-text").text(" ");
 	};
 });
-
+//Show default input-box text
 $("body").click(function(e){
 	if (e.target.id != "input-text" ) {
-		var text = jQuery.trim($("#input-text").text());
+		var text = jQuery.trim($(".input-text").text());
 		if (text.length == 0) {
-			$("#input-text").text("Start typing here.");
+			$(".input-text").text("Start typing here.");
 		};
 	
 	};
@@ -158,68 +199,56 @@ $("body").click(function(e){
 });
 
 //Make panel buttons draggable
-$("#text-button").draggable( {
+$(".text-button").draggable( {
     revert : true
   } );
 
-//Make buttons droppable on article section
-$("#article-container").droppable( {
-	over: function(){
-		var width = $("#article-text").width() / 2;
-		$("#article-text").css("width" , width);
-		$("#input-box-container").fadeIn();
-	},
-	out: function(){
-		$("#input-box-container").fadeOut();
-		setTimeout(function() {
-		var width = $("#article-text").width() * 2;
-		$("#article-text").css("width" , width);
-		}, 500);
 
-	}
-});
 
 //Make text box red when hovering over the X
-$('body').on('mouseenter', '#corner-hover', function(){
-		$("#left-border img").attr("src","assets/images/resize-remove.png");
-		$("#right-border img").attr("src","assets/images/resize-remove.png");
-		$("#bottom-border img").attr("src","assets/images/resize-remove.png");
-		$("#corner img").attr("src","assets/images/corner-delete.png");
+$('body').on('mouseenter', '.corner-hover', function(){
+		$(".left-border img").attr("src","assets/images/resize-remove.png");
+		$(".right-border img").attr("src","assets/images/resize-remove.png");
+		$(".bottom-border img").attr("src","assets/images/resize-remove.png");
+		$(".corner img").attr("src","assets/images/corner-delete.png");
 		var redborder = "2px solid rgb(239, 122, 116)";
-		$("#input-box").css("border", redborder);
+		$(".input-box").css("border", redborder);
 	});
 
 //Undo red box effect
-$('body').on('mouseleave', '#corner-hover', function(){
-		$("#left-border img").attr("src","assets/images/resize-bar.png");
-		$("#right-border img").attr("src","assets/images/resize-bar.png");
-		$("#bottom-border img").attr("src","assets/images/resize-bar.png");
-		$("#corner img").attr("src","assets/images/corner-test.png");
+$('body').on('mouseleave', '.corner-hover', function(){
+		$(".left-border img").attr("src","assets/images/resize-bar.png");
+		$(".right-border img").attr("src","assets/images/resize-bar.png");
+		$(".bottom-border img").attr("src","assets/images/resize-bar.png");
+		$(".corner img").attr("src","assets/images/corner-test.png");
 		var blueborder = "2px solid #8fc7ff";
-		$("#input-box").css("border", blueborder);
+		$(".input-box").css("border", blueborder);
 	});
 //remove text box when clicking on X
-$('body').on('click', '#corner-hover', function(){
+$('body').on('click', '.corner-hover', function(){
 	var width = $("#article-text").width() * 2;
-	$("#input-box-container").hide();
-	$("#article-text").css("width" , width);
+	$(".input-box-container").hide();
+	$(".article-text").css("width" , width);
 
 	});
 //Input box resizable function
-$("#input-box").resizable({
+$(".input-box").resizable({
 	 handles: {
-        'w': '#left-resize',
-        'e': '#right-resize',
-        's': '#bottom-resize'
+        'w': '.left-resize',
+        'e': '.right-resize',
+        's': '.bottom-resize'
     },
-	cancel: "#input-box",
+	cancel: ".input-box",
 	
 });
 
-
+//Clicking add-image logo triggers file upload
   
-$("#add-image-logo, #add-image-text").click(function(){
-    	$("#file-input").click(); //file upload handled by file-upload.js
+
+	$('body').on('click', ".add-image-logo, .add-image-text", function(){
+		var pageID = "." + $(".selected").attr('class').split(' ')[0];
+    	$(".file-input" + pageID).click(); //file upload handled by file-upload.js
+
 	}); 
 
 

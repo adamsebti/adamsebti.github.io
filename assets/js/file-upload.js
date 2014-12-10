@@ -1,6 +1,8 @@
-window.onload = function() {
+function fileUpload(pageID) {
 
-    var fileInput = document.getElementById('file-input');
+	
+    var fileInput = $('.file-input' + pageID)[0];
+   
    
 
     fileInput.addEventListener('change', function(e) {
@@ -11,8 +13,8 @@ window.onload = function() {
 		  var reader = new FileReader();
 
 		  reader.onload = function(e) {
-		  	$('#display-image').show();
-		  	 var fileDisplayArea = document.getElementById('display-image');
+		  	$('.display-image' + pageID).css("display", "inline-block");
+		  	 var fileDisplayArea = $('.display-image' + pageID)[0];
 		    fileDisplayArea.innerHTML = "";
 
 		    // Create a new image.
@@ -20,9 +22,15 @@ window.onload = function() {
 		    // Set the img src property using the data URL.
 		    img.src = reader.result;
 
+
 		    // Add the image to the page.
 		    fileDisplayArea.appendChild(img);
-		    $("#add-image-container").hide();
+		    $(".add-image-container" + pageID).hide();
+		    $(".image-draggable-zone" + pageID).show()
+			$( ".display-image" + pageID).draggable({
+			  containment: "parent"
+			});
+			$(".display-image img").addClass("scaled");
 		  }
 
 		  reader.readAsDataURL(file); 

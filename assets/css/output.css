@@ -13,6 +13,7 @@ body, html {
   min-width: 100%;
   font-size: 1em;
   display: block;
+  min-width: 1200px;
   color: #191917;
   -webkit-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
@@ -20,17 +21,17 @@ body, html {
   -moz-osx-font-smoothing: grayscale;
   font-family: Helvetica Neue; }
 
-#top-bar {
+.top-bar {
   background-color: #518dca;
   width: 100%;
   height: 7%;
   border-bottom: 2px solid black; }
 
-#logo {
+.logo {
   padding-left: 0.5em;
   padding-top: 0.5em; }
 
-#left-bar {
+.left-bar {
   display: inline-block;
   width: 16%;
   height: 93%;
@@ -59,7 +60,7 @@ body, html {
   font-family: ProximaNova-sbold;
   font-size: 1.2em; }
 
-#button-container {
+.button-container {
   width: 100%;
   height: 15.5em; }
 
@@ -76,7 +77,7 @@ body, html {
 .panel-button.top-panel {
   border-bottom: 2px solid black; }
 
-#elements {
+.elements {
   height: 18em; }
 
 .panel-content {
@@ -96,7 +97,7 @@ body, html {
 .panel-logo {
   height: 4em; }
 
-#templates-content {
+.templates-content {
   height: 11.5em;
   width: 100%; }
 
@@ -106,7 +107,7 @@ body, html {
   height: 2em;
   margin: auto;
   margin-top: 0.5em;
-  border-radius: 3px;
+  border-radius: 2px;
   position: relative; }
 
 .page-button-text {
@@ -147,7 +148,7 @@ body, html {
   height: 2em;
   margin: auto;
   margin-top: 0.5em;
-  border-radius: 3px;
+  border-radius: 2px;
   background-color: #2c3e50;
   border: 2px solid #4f657b;
   display: table;
@@ -155,7 +156,7 @@ body, html {
   border-spacing: 10px 0px;
   position: relative; }
 
-#add-page-logo {
+.add-page-logo {
   display: table-cell;
   height: 1.2em;
   width: 1.5em;
@@ -183,12 +184,12 @@ body, html {
 textarea:focus, input:focus {
   outline: 0; }
 
-#site-grid {
+.site-grid {
   width: 100%;
   height: 6em;
   border-bottom: 2px solid #232323; }
 
-#site-grid-text {
+.site-grid-text {
   margin-top: 2em;
   text-align: center;
   color: #4f657b;
@@ -198,28 +199,28 @@ textarea:focus, input:focus {
   width: 48%;
   float: left; }
 
-#site-grid-logo-container {
+.site-grid-logo-container {
   width: 48%;
   float: left;
   cursor: pointer; }
 
-#site-grid-logo {
+.site-grid-logo {
   width: 70%;
   margin-top: 20px; }
 
-#templates-title {
+.templates-title {
   border-top: none; }
 
-#main {
+.main {
   height: 93%;
   width: 83%;
   display: inline-block; }
 
-#page-tab-container {
+.page-tab-container {
   width: 100%;
   height: 15%; }
 
-#page-tabs {
+.page-tabs {
   height: 40%;
   width: 80%;
   margin: auto;
@@ -235,7 +236,7 @@ textarea:focus, input:focus {
   display: inline-block;
   background-color: white;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 2px solid #4f657b;
   color: #4f657b;
   margin-right: 3px;
@@ -265,27 +266,27 @@ textarea:focus, input:focus {
   cursor: pointer;
   opacity: 0; }
 
-#remove-logo {
+.remove-logo {
   height: 100%; }
 
 .remove {
   background-color: #d86a65; }
 
-#add-image-container {
+.add-image-container {
   height: 35%;
   width: 80%;
   margin: auto;
   background-color: #eff2f5;
   border: 2px solid #97aabc;
-  border-radius: 10px;
+  border-radius: 5px;
   display: table; }
 
-#add-image-content {
+.add-image-content {
   display: table-cell;
   vertical-align: middle;
   text-align: center; }
 
-#add-image-text {
+.add-image-text {
   position: relative;
   font-family: proximanova-sbold;
   color: #828F9B;
@@ -293,37 +294,37 @@ textarea:focus, input:focus {
   cursor: pointer;
   font-size: 14px; }
 
-#plus-logo {
+.plus-logo {
   display: inline; }
 
-#plus-img {
+.plus-img {
   height: 12px; }
 
-#add-image-title {
+.add-image-title {
   display: inline; }
 
-#image-placeholder {
+.image-placeholder {
   cursor: pointer; }
 
-#article-container {
+.article-container {
   width: 80%;
   margin: 0 auto;
   margin-top: 5%;
   height: 40%;
   color: #4f657b; }
 
-#article-title {
+.article-title {
   font-family: proximanova-sbold;
   font-size: 32px;
   margin-bottom: 2%; }
 
-#article-text {
+.article-text {
   line-height: 2;
   font-size: 0.9em;
   width: 100%;
   float: left; }
 
-#input-box-container {
+.input-box-container {
   float: left;
   width: 49%;
   height: 80%;
@@ -336,17 +337,17 @@ textarea:focus, input:focus {
   height: 0;
   width: 0; }
 
-#left-border {
+.left-border {
   left: -3;
   top: 0;
   bottom: 0; }
 
-#right-border {
+.right-border {
   right: 3;
   top: 0;
   bottom: 0; }
 
-#bottom-border {
+.bottom-border {
   bottom: -3;
   left: 0;
   right: 0;
@@ -359,11 +360,11 @@ textarea:focus, input:focus {
   transform: rotate(270deg);
   transform-origin: 50% 50%; }
 
-#input-text-container {
+.input-text-container {
   width: 100%;
   height: 80%; }
 
-#input-text {
+.input-text {
   width: 80%;
   height: 80%;
   margin: 0 auto;
@@ -374,20 +375,20 @@ textarea:focus, input:focus {
   transform: translateY(-50%);
   font-size: 0.9em; }
 
-#input-box {
+.input-box {
   margin-left: 25px;
   border: 2px solid #8fc7ff;
   position: relative;
   min-width: 100px; }
 
-#corner {
+.corner {
   top: -2;
   right: 33; }
 
 div:focus {
   outline: 0px solid transparent; }
 
-#corner-hover {
+.corner-hover {
   position: absolute;
   top: 0;
   width: 40px;
@@ -399,7 +400,7 @@ div:focus {
 .delete {
   border: 2px solid #ef7a74; }
 
-#left-resize {
+.left-resize {
   position: absolute;
   left: -10;
   top: 40;
@@ -409,7 +410,7 @@ div:focus {
   cursor: pointer;
   width: 20px; }
 
-#right-resize {
+.right-resize {
   position: absolute;
   right: -10;
   top: 40;
@@ -419,7 +420,7 @@ div:focus {
   cursor: pointer;
   width: 20px; }
 
-#bottom-resize {
+.bottom-resize {
   position: absolute;
   left: 40;
   right: 0;
@@ -429,28 +430,35 @@ div:focus {
   cursor: pointer;
   width: 60px; }
 
-#file-input {
+.file-input {
   position: absolute;
-  top: -100; }
+  top: -200; }
 
-#display-image {
-  width: 80%;
+.display-image {
+  width: 40%;
   height: 35%;
   margin: auto;
   display: none;
   overflow: hidden;
-  text-align: center; }
+  text-align: center;
+  cursor: pointer;
+  z-index: 999;
+   }
+
+.image-draggable-zone {
+  position: absolute;
+  width: 80%;
+  height: 40%;
+  display: none;
+}
 
 @media (max-width: 1100px) {
-  #left-bar {
+  .left-bar {
     -moz-transform: scale(0.8, 0.8);
     /* Moz-browsers */
     zoom: 0.8;
     /* Other non-webkit browsers */
     zoom: 80%;
     /* Webkit browsers */ } }
-    @media (max-width: 1255px) {
-  .panel-button {
-    padding-right: 0px; } }
 
-/*# sourceMappingURL=output.css.map */
+/*. sourceMappingURL=output.css.map */
