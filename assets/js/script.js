@@ -6,8 +6,6 @@ var pageHTML = $(".page-content").html();
 var pageArray = ["PAGE"];
 var pageCounter = {};
 
-
-
 //Returns an ID for a given page
 function getID(pageName) {
     if (pageArray.indexOf(pageName) == -1){
@@ -84,25 +82,20 @@ fileUpload(".Page");
  	$(".selected").removeClass("selected");
  	$(".last-tab").addClass("selected");
 
- 	//Add page ID for file upload
+ 	//Initialize IDs of new page
+ 	update = [".file-input",".display-image",".add-image-container", ".image-draggable-zone",".article-text",".input-box-container"];
  	var pageSelector = "." + id +".page-content";
- 	$(pageSelector).find("input").attr("class","file-input " + id);
- 	$(pageSelector).find(".display-image").attr("class","display-image " + id);
- 	$(pageSelector).find(".add-image-container").attr("class","add-image-container " + id);
- 	$(pageSelector).find(".image-draggable-zone").attr("class","image-draggable-zone " + id);
- 	$(pageSelector).find(".article-text").attr("class","article-text " + id);
- 	$(pageSelector).find(".input-box-container").attr("class","input-box-container " + id)
+ 	for (var i = 0; i < update.length; i++) {
+ 		$(pageSelector).find(update[i]).attr("class",update[i].replace(".", "") + " " + id);
+ 	};
  	
-
  	//Make article section droppable & and event listener for file upload
  	setTimeout(function() {
 	 	makeDroppable($(".article-container"));
 	 	fileUpload("."+id);
  	}, 0);
-
- 	
-
  }});
+
 //Pressing enter clicks on add-page + button
  $(".add-page-input").keydown(function(e) {
  	setTimeout(function() {
