@@ -59,7 +59,6 @@ fileUpload(".Page");
  	var pageName = $(".add-page-input").val();
  	var id = getID(pageName);
  	var pageContent = "<div class='"+ id + " page-content current-page'>"+ pageHTML +"</div>";
- 	$()
  	var previousPage = $(".last-page");
  	var page = '<div class="'+ id +' page-button darkgray last-page"><div class="page-button-text">' + pageName + '</div><div class="remove-button"><img class="remove-logo"src="assets/images/remove.png"></div></div>';
 	$(".last-page").after(page);
